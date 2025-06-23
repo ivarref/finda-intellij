@@ -6,12 +6,11 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyFileEditorManagerListener implements FileEditorManagerListener {
     private final Project project;
@@ -20,8 +19,10 @@ public class MyFileEditorManagerListener implements FileEditorManagerListener {
         this.project = project;
     }
 
-    public static void doLog(String msg) {
-        String fileName = System.getProperty("user.home") + "/.finda/ideaplugin.log";
+    private static final String findaDir = System.getProperty("user.home") + "/.finda";
+
+    public static void info(String msg) {
+        String fileName = findaDir + "/integrations/finda_intellij/plugin.log";
         try (PrintWriter pw = new PrintWriter(new FileWriter(fileName, StandardCharsets.UTF_8, true))) {
             pw.println(msg);
         } catch (IOException e) {
@@ -31,36 +32,42 @@ public class MyFileEditorManagerListener implements FileEditorManagerListener {
 
     @Override
     public void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
-        doLog("***************************************************");
+        info("***************************************************");
         String basePath = source.getProject().getBasePath();
         String enc = URLEncoder.encode(basePath, StandardCharsets.UTF_8);
 
-        String jsonFileName = System.getProperty("user.home") + "/.finda/external_data/idea_project_" + enc + ".json";
-//        String meh = basePath.split(Pattern.quote("/"));
+        String jsonFileName = findaDir + "/external_data/idea_project_" + enc + ".json";
 
-        doLog("Project base path is: " + enc);
+        info("Project base path is: " + enc);
 
         try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(jsonFileName, StandardCharsets.UTF_8, false)))) {
             pw.println("[");
 
+            List<String> files = new ArrayList<>();
             for (VirtualFile vf : source.getOpenFiles()) {
-                if (vf != source.getOpenFiles()[0]) {
+                if (vf.toString().startsWith("file:///")) {
+                    files.add(vf.getCanonicalPath());
+                }
+            }
+            for (String fileStr : files) {
+                if (!fileStr.equals(files.get(0))) {
                     pw.println(",");
                 }
                 pw.println("{");
-                String label = "janei: " + vf.getName();
-                String command = "python3 " + System.getProperty("user.home") + "/code/ideaopen/ideaopen.py " + vf.getCanonicalPath();
+                File file1 = new File(fileStr);
+                String label = "janei: " + file1.getName();
+                String command = "python3 " + findaDir + "/integrations/finda_intellij/ideaopen.py " + fileStr;
                 pw.println("\"label\": \"" +label + "\",");
                 pw.println("\"command\": \"" + command + "\"");
                 pw.println("}");
-                doLog("Open file: " + vf + " " + vf.getCanonicalPath());
+                info("Open file: " + fileStr);
             }
 
             pw.println("]");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        doLog("Wrote file: " + jsonFileName);
+        info("Wrote file: " + jsonFileName);
     }
 
     @Override

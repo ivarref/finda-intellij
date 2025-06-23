@@ -5,7 +5,8 @@ import subprocess
 import time
 
 def debug(v):
-    with open('/Users/ire/code/ideaopen/log.txt', 'a') as fd:
+    path = os.environ['HOME'] + '/.finda/integrations/finda_intellij/ideaopen.log'
+    with open(path, 'a') as fd:
         fd.write(str(v) + '\n')
 
 def get_project_path(folder_name):
