@@ -43,6 +43,6 @@ bin/
 
 .intellijPlatform/
 lib/
-.idea/
 .run/
 ideaopen.log
+*.log

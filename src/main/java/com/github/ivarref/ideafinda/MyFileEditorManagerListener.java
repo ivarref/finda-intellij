@@ -13,17 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyFileEditorManagerListener implements FileEditorManagerListener {
-    private final Project project;
 
-    public MyFileEditorManagerListener(Project project) {
-        this.project = project;
+    public MyFileEditorManagerListener(final Project project) {
+        super();
     }
 
     private static final String findaDir = System.getProperty("user.home") + "/.finda";
 
-    public static void info(String msg) {
-        String fileName = findaDir + "/integrations/finda_intellij/plugin.log";
-        try (PrintWriter pw = new PrintWriter(new FileWriter(fileName, StandardCharsets.UTF_8, true))) {
+    private static void info(final String msg) {
+        final String fileName = findaDir + "/integrations/finda_intellij/plugin.log";
+        try (final FileWriter fw = new FileWriter(fileName, StandardCharsets.UTF_8, true);
+             final PrintWriter pw = new PrintWriter(fw)) {
             pw.println(msg);
         } catch (IOException e) {
             e.printStackTrace();
