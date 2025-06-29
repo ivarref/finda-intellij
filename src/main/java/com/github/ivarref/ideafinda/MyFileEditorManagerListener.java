@@ -4,6 +4,7 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.FileEditorManagerListener;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -20,7 +21,7 @@ public class MyFileEditorManagerListener implements FileEditorManagerListener {
 
     private static final String findaDir = System.getProperty("user.home") + "/.finda";
 
-    private static void info(final String msg) {
+    private static synchronized void info(final String msg) {
         final String fileName = findaDir + "/integrations/finda_intellij/plugin.log";
         try (final FileWriter fw = new FileWriter(fileName, StandardCharsets.UTF_8, true);
              final PrintWriter pw = new PrintWriter(fw)) {
@@ -51,7 +52,7 @@ public class MyFileEditorManagerListener implements FileEditorManagerListener {
                 }
             }
             for (String fileStr : files) {
-                if (!fileStr.equals(files.get(0))) {
+                if (!fileStr.equals(files.getFirst())) {
                     pw.println(",");
                 }
                 pw.println("{");
