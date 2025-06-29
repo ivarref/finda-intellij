@@ -8,7 +8,7 @@
     <name>Pluggy</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor url="https://www.yourcompany.com">YourCompany</vendor>
+    <vendor url="https://github.com/ivarref/">github.com/ivarref</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
@@ -29,8 +29,21 @@
     <actions>
         <action id="com.github.ivarref.ideafinda.PopupDialogAction"
                 class="com.github.ivarref.ideafinda.PopupDialogAction" text="Ivar Dialog Action"
-                description="Ivar Dialog Action Description">
+                description="Ivar dialog action description">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+        <action id="com.github.ivarref.ideafinda.InsertCommaAction"
+                class="com.github.ivarref.ideafinda.InsertCommaAction"
+                text="Insert comma at caret"/>
+        <action id="com.github.ivarref.ideafinda.InsertCommaSpaceAction"
+                class="com.github.ivarref.ideafinda.InsertCommaSpaceAction"
+                text="Insert comma+space action">
+            <keyboard-shortcut keymap="$default" first-keystroke="COMMA" second-keystroke="SPACE"/>
+        </action>
+        <action id="com.github.ivarref.ideafinda.InsertCommaEnterAction"
+                class="com.github.ivarref.ideafinda.InsertCommaEnterAction"
+                text="Insert comma+enter action">
+            <keyboard-shortcut keymap="$default" first-keystroke="COMMA" second-keystroke="ENTER"/>
         </action>
     </actions>
     <projectListeners>
