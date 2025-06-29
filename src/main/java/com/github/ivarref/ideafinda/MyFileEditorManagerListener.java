@@ -14,16 +14,16 @@ import java.util.List;
 
 public class MyFileEditorManagerListener implements FileEditorManagerListener {
 
-    public MyFileEditorManagerListener(final Project project) {
+    public MyFileEditorManagerListener(Project project) {
         super();
     }
 
     private static final String findaDir = System.getProperty("user.home") + "/.finda";
 
-    private static synchronized void info(final String msg) {
-        final String fileName = findaDir + "/integrations/finda_intellij/plugin.log";
-        try (final FileWriter fw = new FileWriter(fileName, StandardCharsets.UTF_8, true);
-             final PrintWriter pw = new PrintWriter(fw)) {
+    private static synchronized void info(String msg) {
+        String fileName = findaDir + "/integrations/finda_intellij/plugin.log";
+        try (FileWriter fw = new FileWriter(fileName, StandardCharsets.UTF_8, true);
+             PrintWriter pw = new PrintWriter(fw)) {
             pw.println(msg);
         } catch (IOException e) {
             e.printStackTrace();
