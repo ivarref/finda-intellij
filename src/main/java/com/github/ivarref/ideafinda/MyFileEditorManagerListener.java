@@ -4,7 +4,6 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.FileEditorManagerListener;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -58,8 +57,9 @@ public class MyFileEditorManagerListener implements FileEditorManagerListener {
                 pw.println("{");
                 File file1 = new File(fileStr);
                 String label = "janei: " + file1.getName();
-                String command = "python3 " + findaDir + "/integrations/finda_intellij/ideaopen.py " + fileStr;
-                pw.println("\"label\": \"" +label + "\",");
+                String command = "python3 " +
+                        findaDir + "/integrations/finda_intellij/ideaopen.py " + fileStr;
+                pw.println("\"label\": \"" + label + "\",");
                 pw.println("\"command\": \"" + command + "\"");
                 pw.println("}");
                 info("Open file: " + fileStr);
