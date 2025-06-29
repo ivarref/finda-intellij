@@ -31,7 +31,7 @@ public class MyFileEditorManagerListener implements FileEditorManagerListener {
     }
 
     @Override
-    public void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
+    public final void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
         info("***************************************************");
         String basePath = source.getProject().getBasePath();
         String enc = URLEncoder.encode(basePath, StandardCharsets.UTF_8);
@@ -40,7 +40,8 @@ public class MyFileEditorManagerListener implements FileEditorManagerListener {
 
         info("Project base path is: " + enc);
 
-        try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(jsonFileName, StandardCharsets.UTF_8, false)))) {
+        try (PrintWriter pw = new PrintWriter(new BufferedWriter(
+                new FileWriter(jsonFileName, StandardCharsets.UTF_8, false)))) {
             pw.println("[");
 
             List<String> files = new ArrayList<>();
@@ -71,7 +72,7 @@ public class MyFileEditorManagerListener implements FileEditorManagerListener {
     }
 
     @Override
-    public void fileClosed(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
-        fileOpened(source, file);
+    public final void fileClosed(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
+        this.fileOpened(source, file);
     }
 }
