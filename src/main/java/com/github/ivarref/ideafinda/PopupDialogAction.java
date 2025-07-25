@@ -47,7 +47,7 @@ public class PopupDialogAction extends AnAction {
                 title,
                 Messages.getInformationIcon());
 
-        Messages.showInfoMessage("Hello World", "my title");
+//        Messages.showInfoMessage("Hello World", "my title");
     }
 
     public final @NotNull ActionUpdateThread getActionUpdateThread() {

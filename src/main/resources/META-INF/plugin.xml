@@ -12,10 +12,8 @@
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
-    <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
-  ]]></description>
+    <description>Min plugin. Den er kjempebra! Og må tydelegvis innehalda minst 40 teikn.
+    </description>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
@@ -27,23 +25,50 @@
 
     </extensions>
     <actions>
+        <group
+                id="com.github.ivarref.ChooseInitialNextAction"
+                text="Devil Mode - Choose Initial Next Action"
+                popup="true">
+            <add-to-group
+                    group-id="ToolsMenu"
+                    anchor="after"
+                    relative-to-action="com.github.ivarref.ideafinda.PopupDialogAction"/>
+            <action
+                    class="com.github.ivarref.ideafinda.NextErrorAction"
+                    id="org.intellij.sdk.action.GroupPopDialogAction1"
+                    text="&amp;error"
+                    description="Go to next error">
+            </action>
+            <action
+                    class="com.github.ivarref.ideafinda.NextChangeAction"
+                    id="org.intellij.sdk.action.GroupPopDialogAction2"
+                    text="&amp;change"
+                    description="Go to next change">
+            </action>
+        </group>
         <action id="com.github.ivarref.ideafinda.PopupDialogAction"
-                class="com.github.ivarref.ideafinda.PopupDialogAction" text="Ivar Dialog Action"
+                class="com.github.ivarref.ideafinda.PopupDialogAction"
+                text="Ivar Dialog Action"
                 description="Ivar dialog action description">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
         <action id="com.github.ivarref.ideafinda.InsertCommaAction"
                 class="com.github.ivarref.ideafinda.InsertCommaAction"
-                text="Insert comma at caret"/>
+                text="Insert Comma at Caret"/>
         <action id="com.github.ivarref.ideafinda.InsertCommaSpaceAction"
                 class="com.github.ivarref.ideafinda.InsertCommaSpaceAction"
-                text="Insert comma+space action">
+                text="Insert Comma+Space Action">
             <keyboard-shortcut keymap="$default" first-keystroke="COMMA" second-keystroke="SPACE"/>
         </action>
         <action id="com.github.ivarref.ideafinda.InsertCommaEnterAction"
                 class="com.github.ivarref.ideafinda.InsertCommaEnterAction"
-                text="Insert comma+enter action">
+                text="Insert Comma+Enter Action">
             <keyboard-shortcut keymap="$default" first-keystroke="COMMA" second-keystroke="ENTER"/>
+        </action>
+        <action id="com.github.ivarref.ideafinda.ChooseInitialNextAction"
+                class="com.github.ivarref.ideafinda.ChooseInitialNextAction"
+                text="Choose Initial Next Action">
+            <keyboard-shortcut keymap="$default" first-keystroke="COMMA" second-keystroke="N"/>
         </action>
     </actions>
     <projectListeners>
