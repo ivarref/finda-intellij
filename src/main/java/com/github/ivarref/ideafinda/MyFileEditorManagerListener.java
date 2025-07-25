@@ -20,7 +20,7 @@ public class MyFileEditorManagerListener implements FileEditorManagerListener {
 
     private static final String findaDir = System.getProperty("user.home") + "/.finda";
 
-    private static synchronized void info(String msg) {
+    public static synchronized void info(String msg) {
         String fileName = findaDir + "/integrations/finda_intellij/plugin.log";
         try (FileWriter fw = new FileWriter(fileName, StandardCharsets.UTF_8, true);
              PrintWriter pw = new PrintWriter(fw)) {
@@ -74,6 +74,6 @@ public class MyFileEditorManagerListener implements FileEditorManagerListener {
 
     @Override
     public final void fileClosed(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
-        this.fileOpened(source, file);
+        fileOpened(source, file);
     }
 }

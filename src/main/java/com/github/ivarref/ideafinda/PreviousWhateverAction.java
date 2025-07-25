@@ -7,8 +7,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import org.jetbrains.annotations.NotNull;
 
-import static com.github.ivarref.ideafinda.NextWhateverAction.currentAction;
-
 public class PreviousWhateverAction extends AnAction {
 
     @Override
@@ -19,7 +17,14 @@ public class PreviousWhateverAction extends AnAction {
 
     @Override
     public final void actionPerformed(@NotNull AnActionEvent e) {
-        Messages.showInfoMessage("::" + currentAction, "Previous action is ...");
+        if (NextWhateverAction.NextAction.ERROR == NextWhateverAction.currentAction) {
+            NextWhateverAction.executeActionId("GotoPreviousError", e);
+        } else if (NextWhateverAction.NextAction.CHANGE == NextWhateverAction.currentAction) {
+            NextWhateverAction.executeActionId("JumpToLastChange", e);
+        } else {
+            Messages.showInfoMessage("::" + NextWhateverAction.currentAction,
+                    "Previous action is ...");
+        }
     }
 
     public final @NotNull ActionUpdateThread getActionUpdateThread() {

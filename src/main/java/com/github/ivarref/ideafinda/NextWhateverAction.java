@@ -16,28 +16,34 @@ public class NextWhateverAction extends AnAction {
 
     public static NextAction currentAction = NextAction.ERROR;
 
+    public static void executeActionId(@NotNull String actionId, @NotNull AnActionEvent event) {
+        AnAction action = event.getActionManager().getAction(actionId);
+        ActionUtil.performActionDumbAwareWithCallbacks(action, event);
+    }
+
     @Override
     public final void update(@NotNull AnActionEvent event) {
-        final Project project = event.getProject();
+        Project project = event.getProject();
         event.getPresentation().setEnabledAndVisible(null != project);
     }
 
     @Override
     public final void actionPerformed(@NotNull AnActionEvent e) {
-        Messages.showInfoMessage("::" + currentAction, "Next action is ...");
-//        e.getActionManager().getAction("janei").get
+        if (NextAction.ERROR == currentAction) {
+            executeActionId("GotoNextError", e);
+        } else if (NextAction.CHANGE == currentAction) {
+            executeActionId("JumpToNextChange", e);
+        } else {
+            Messages.showInfoMessage("::" + currentAction, "Next action is ...");
+        }
     }
 
     public final @NotNull ActionUpdateThread getActionUpdateThread() {
         return super.getActionUpdateThread();
     }
 
-    public static final void run(@NotNull AnActionEvent e, NextAction action) {
+    public static void run(@NotNull AnActionEvent e, NextAction action) {
         currentAction = action;
-        AnAction selfAction = e.getActionManager().getAction("com.github.ivarref.ideafinda.NextWhateverAction");
-        ActionUtil.performActionDumbAwareWithCallbacks(selfAction, e);
+        executeActionId("com.github.ivarref.ideafinda.NextWhateverAction", e);
     }
-
-
-
 }
