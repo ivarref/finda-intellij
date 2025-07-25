@@ -32,7 +32,7 @@ public class NextWhateverAction extends AnAction {
         if (NextAction.ERROR == currentAction) {
             executeActionId("GotoNextError", e);
         } else if (NextAction.CHANGE == currentAction) {
-            executeActionId("JumpToNextChange", e);
+            executeActionId("VcsShowNextChangeMarker", e);
         } else {
             Messages.showInfoMessage("::" + currentAction, "Next action is ...");
         }

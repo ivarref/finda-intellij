@@ -1,14 +1,16 @@
 package com.github.ivarref.ideafinda;
 
-import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
+import com.intellij.openapi.ui.popup.ListPopup;
 import org.jetbrains.annotations.NotNull;
 
-public class PreviousWhateverAction extends AnAction {
+public class WindowChooseAction extends AnAction {
 
     @Override
     public final void update(@NotNull AnActionEvent event) {
@@ -18,14 +20,15 @@ public class PreviousWhateverAction extends AnAction {
 
     @Override
     public final void actionPerformed(@NotNull AnActionEvent e) {
-        if (NextWhateverAction.NextAction.ERROR == NextWhateverAction.currentAction) {
-            NextWhateverAction.executeActionId("GotoPreviousError", e);
-        } else if (NextWhateverAction.NextAction.CHANGE == NextWhateverAction.currentAction) {
-            NextWhateverAction.executeActionId("VcsShowPrevChangeMarker", e);
-        } else {
-            Messages.showInfoMessage("::" + NextWhateverAction.currentAction,
-                    "Previous action is ...");
-        }
+        String id = "com.github.ivarref.ChooseWindowAction";
+        ActionGroup action = (ActionGroup) e.getActionManager().getAction(id);
+        ListPopup actionGroupPopup = JBPopupFactory.getInstance().createActionGroupPopup(
+                "Tab / Window ...",
+                action,
+                e.getDataContext(),
+                JBPopupFactory.ActionSelectionAid.MNEMONICS,
+                false);
+        actionGroupPopup.showCenteredInCurrentWindow(e.getProject());
     }
 
     public final @NotNull ActionUpdateThread getActionUpdateThread() {

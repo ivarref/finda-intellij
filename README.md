@@ -3,13 +3,28 @@
 Build the plugin:
 
 ```
-gradle buildPlugin
-# or: ./build.sh
+./build.sh
 ```
 
 Execute action `Install Plugin from Disk ...`.
 
 Select `./build/distributions/pluggy-1.0-SNAPSHOT.zip`. Restart the IDE.
+
+## Implemented
+
+* Next: change, error.
+
+* Window/tab: close.
+
+## Goals
+
+* Next: Across files.
+
+* Window: split if needed, move otherwise.
+
+## Non goals
+
+* Clever install method from command line.
 
 ## Finda
 

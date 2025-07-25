@@ -46,6 +46,28 @@
                     description="Go to next change">
             </action>
         </group>
+        <group
+                id="com.github.ivarref.ChooseWindowAction"
+                text="Devil Mode - Choose Window Action"
+                popup="true">
+            <add-to-group
+                    group-id="ToolsMenu"
+                    anchor="after"
+                    relative-to-action="com.github.ivarref.ideafinda.PopupDialogAction"/>
+            <action
+                    class="com.github.ivarref.ideafinda.CloseTabAction"
+                    id="org.intellij.sdk.action.GroupPopDialogAction3"
+                    text="&amp;close"
+                    description="Close tab">
+            </action>
+            <action
+                    class="com.github.ivarref.ideafinda.NextChangeAction"
+                    id="org.intellij.sdk.action.GroupPopDialogAction4"
+                    text="&amp;split"
+                    description="Split / move to next group">
+            </action>
+        </group>
+
         <action id="com.github.ivarref.ideafinda.PopupDialogAction"
                 class="com.github.ivarref.ideafinda.PopupDialogAction"
                 text="Ivar Dialog Action"
@@ -80,6 +102,10 @@
                 text="Previous Whatever Action"
                 description="Previous whatever action">
             <keyboard-shortcut keymap="$default" first-keystroke="meta P"/>
+        </action>
+        <action id="com.github.ivarref.ideafinda.WindowChooseAction"
+                class="com.github.ivarref.ideafinda.WindowChooseAction" text="Choose Window Action">
+            <keyboard-shortcut keymap="$default" first-keystroke="COMMA" second-keystroke="W"/>
         </action>
     </actions>
     <projectListeners>

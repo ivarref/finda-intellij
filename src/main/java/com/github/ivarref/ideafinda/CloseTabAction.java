@@ -1,14 +1,13 @@
 package com.github.ivarref.ideafinda;
 
-import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.ex.ActionUtil;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
 import org.jetbrains.annotations.NotNull;
 
-public class PreviousWhateverAction extends AnAction {
+public class CloseTabAction extends AnAction {
 
     @Override
     public final void update(@NotNull AnActionEvent event) {
@@ -18,14 +17,8 @@ public class PreviousWhateverAction extends AnAction {
 
     @Override
     public final void actionPerformed(@NotNull AnActionEvent e) {
-        if (NextWhateverAction.NextAction.ERROR == NextWhateverAction.currentAction) {
-            NextWhateverAction.executeActionId("GotoPreviousError", e);
-        } else if (NextWhateverAction.NextAction.CHANGE == NextWhateverAction.currentAction) {
-            NextWhateverAction.executeActionId("VcsShowPrevChangeMarker", e);
-        } else {
-            Messages.showInfoMessage("::" + NextWhateverAction.currentAction,
-                    "Previous action is ...");
-        }
+        AnAction action = e.getActionManager().getAction("CloseContent");
+        ActionUtil.performActionDumbAwareWithCallbacks(action, e);
     }
 
     public final @NotNull ActionUpdateThread getActionUpdateThread() {
