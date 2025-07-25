@@ -75,6 +75,12 @@
                 description="Next whatever action">
             <keyboard-shortcut keymap="$default" first-keystroke="meta N"/>
         </action>
+        <action id="com.github.ivarref.ideafinda.PreviousWhateverAction"
+                class="com.github.ivarref.ideafinda.PreviousWhateverAction"
+                text="Previous Whatever Action"
+                description="Previous whatever action">
+            <keyboard-shortcut keymap="$default" first-keystroke="meta P"/>
+        </action>
     </actions>
     <projectListeners>
         <listener
