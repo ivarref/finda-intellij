@@ -70,6 +70,11 @@
                 text="Choose Initial Next Action">
             <keyboard-shortcut keymap="$default" first-keystroke="COMMA" second-keystroke="N"/>
         </action>
+        <action id="com.github.ivarref.ideafinda.NextWhateverAction"
+                class="com.github.ivarref.ideafinda.NextWhateverAction" text="Next Whatever Action"
+                description="Next whatever action">
+            <keyboard-shortcut keymap="$default" first-keystroke="meta N"/>
+        </action>
     </actions>
     <projectListeners>
         <listener

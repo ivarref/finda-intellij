@@ -17,7 +17,8 @@ public class NextErrorAction extends AnAction {
 
     @Override
     public final void actionPerformed(@NotNull AnActionEvent e) {
-        Messages.showInfoMessage("Next error", "next error");
+//        Messages.showInfoMessage("Next error", "next error");
+        NextWhateverAction.run(e, NextWhateverAction.NextAction.ERROR);
     }
 
     public final @NotNull ActionUpdateThread getActionUpdateThread() {

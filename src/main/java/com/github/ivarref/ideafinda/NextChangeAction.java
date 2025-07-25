@@ -17,7 +17,8 @@ public class NextChangeAction extends AnAction {
 
     @Override
     public final void actionPerformed(@NotNull AnActionEvent e) {
-        Messages.showInfoMessage("Next change", "next change");
+//        Messages.showInfoMessage("Next change", "next change");
+        NextWhateverAction.run(e, NextWhateverAction.NextAction.CHANGE);
     }
 
     public final @NotNull ActionUpdateThread getActionUpdateThread() {
